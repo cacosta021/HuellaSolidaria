@@ -1,0 +1,250 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Mascotas en Adopción{% endblock %}
+{% block content %}
+
+<h2 class="mb-3">Mascotas en Adopción</h2>
+
+<div class="row g-3">
+
+  <!-- Sidebar filtros -->
+  <div class="col-12 col-md-3">
+    <form method="get" class="card card-body">
+      <h6 class="mb-3">Filtrar por</h6>
+
+      <!-- Tipo -->
+      <div class="mb-2">
+        <label class="form-label">Tipo</label>
+        <select id="select-tipo" name="tipo" class="form-select">
+          <option value="">Todos</option>
+          {% for t in tipos %}
+            {% with p_tipo=params.tipo|default:'' t_id=t.id|stringformat:'s' %}
+              <option value="{{ t.id }}" {% if p_tipo == t_id %}selected{% endif %}>
+                {{ t.nombre }}
+              </option>
+            {% endwith %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Raza -->
+      <div class="mb-2">
+        <label class="form-label">Raza</label>
+        <select name="raza" class="form-select" onchange="this.form.submit()">
+          <option value="">Todas</option>
+          {% for r in razas %}
+            {% with p_raza=params.raza|default:'' r_id=r.id|stringformat:'s' %}
+              <option value="{{ r.id }}" {% if p_raza == r_id %}selected{% endif %}>
+                {{ r.nombre }}
+              </option>
+            {% endwith %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Buscar -->
+      <div class="mb-2">
+        <label class="form-label">Buscar por nombre</label>
+        <input type="text" name="q" class="form-control" placeholder="Ej: Toby" value="{{ params.q|default:'' }}">
+      </div>
+
+      <!-- Tamaño -->
+      <div class="mb-2">
+        <label class="form-label">Tamaño</label>
+        <input name="tam" class="form-control" value="{{ params.tam|default:'' }}" placeholder="Ej: Pequeño">
+      </div>
+
+      <!-- Estado -->
+      <div class="mb-2">
+        <label class="form-label">Estado</label>
+        <select name="estado" class="form-select" onchange="this.form.submit()">
+          <option value="">Todos</option>
+          {% for e in estados %}
+            <option value="{{ e }}" {% if params.estado|default:'' == e %}selected{% endif %}>{{ e }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Botón limpiar -->
+      <div class="d-grid mt-2">
+        <a class="btn btn-outline-secondary" href="?">Limpiar filtros</a>
+      </div>
+
+      <!-- Mantener orden actual invisiblemente -->
+      <input type="hidden" name="o" value="{{ params.o|default:'-id' }}" />
+    </form>
+  </div>
+
+  <!-- Listado + ordenar -->
+  <div class="col-12 col-md-9">
+    <div class="d-flex justify-content-end mb-2">
+      <form method="get" class="d-flex align-items-center gap-2">
+        <!-- preserva los filtros actuales al cambiar orden -->
+        <input type="hidden" name="tipo" value="{{ params.tipo|default:'' }}">
+        <input type="hidden" name="raza" value="{{ params.raza|default:'' }}">
+        <input type="hidden" name="tam" value="{{ params.tam|default:'' }}">
+        <input type="hidden" name="estado" value="{{ params.estado|default:'' }}">
+        <input type="hidden" name="q" value="{{ params.q|default:'' }}">
+
+        <span class="text-muted small">Ordenar:</span>
+        <select name="o" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+          <option value="-id" {% if params.o == "-id" or not params.o %}selected{% endif %}>Más recientes</option>
+          <option value="creado_en" {% if params.o == "creado_en" %}selected{% endif %}>Más antiguos</option>
+          <option value="nombre" {% if params.o == "nombre" %}selected{% endif %}>Nombre A–Z</option>
+          <option value="-nombre" {% if params.o == "-nombre" %}selected{% endif %}>Nombre Z–A</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="row g-3">
+      {% for m in mascotas %}
+        <div class="col-6 col-lg-3">
+          <div class="card h-100 text-center shadow-sm">
+            <div class="position-relative">
+              <div class="ratio ratio-4x3 rounded-top overflow-hidden position-relative">
+                {% if m.foto_url %}
+                  <img src="{{ m.foto_url.url }}" alt="{{ m.nombre }}" class="w-100 h-100 object-fit-cover">
+                {% else %}
+                  <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light text-muted">
+                    Sin foto
+                  </div>
+                {% endif %}
+
+                {% if m.estado and m.estado.nombre|lower != 'disponible' %}
+                  <span class="badge bg-warning position-absolute top-0 start-0 m-2">Adoptado</span>
+                {% endif %}
+
+                {# --- Botón de donación con icono por tipo --- #}
+                <a href="{% url 'donaciones:donar' %}?from=adopciones&pet={{ m.pk }}"
+                   class="donate-fab {% if m.tipo.nombre|lower == 'perro' %}dog{% elif m.tipo.nombre|lower == 'gato' %}cat{% endif %}"
+                   title="Donar para {{ m.nombre }}" aria-label="Donar para {{ m.nombre }}">
+                  {% if m.tipo.nombre|lower == 'perro' %}
+                    <i class="fa-solid fa-bone"></i>
+                  {% elif m.tipo.nombre|lower == 'gato' %}
+                    <i class="fa-solid fa-fish"></i>
+                  {% else %}
+                    <i class="fa-solid fa-heart"></i>
+                  {% endif %}
+                
+                </a>
+              </div>
+            </div>
+
+            <div class="card-body pb-2">
+              <h5 class="fw-bold mb-1">{{ m.nombre }}</h5>
+              <small class="text-muted d-block mb-3">
+                {{ m.tipo.nombre }}{% if m.raza %} • {{ m.raza.nombre }}{% endif %}
+              </small>
+
+              {% if m.estado and m.estado.nombre|lower != 'disponible' %}
+                <button class="btn btn-secondary w-100" disabled>No disponible</button>
+              {% else %}
+                <a href="{% url 'adopta_detalle' m.pk %}" class="btn btn-warning w-100 fw-semibold">Adoptar</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-muted">No encontramos resultados con esos filtros.</div>
+      {% endfor %}
+    </div>
+
+    {% if mascotas.has_other_pages %}
+      <nav class="mt-4">
+        <ul class="pagination">
+
+          {# « Anterior #}
+          {% if mascotas.has_previous %}
+            <li class="page-item">
+              <form method="get">
+                <input type="hidden" name="tipo" value="{{ params.tipo|default:'' }}">
+                <input type="hidden" name="raza" value="{{ params.raza|default:'' }}">
+                <input type="hidden" name="tam" value="{{ params.tam|default:'' }}">
+                <input type="hidden" name="estado" value="{{ params.estado|default:'' }}">
+                <input type="hidden" name="q" value="{{ params.q|default:'' }}">
+                <input type="hidden" name="o" value="{{ params.o|default:'-id' }}">
+                <input type="hidden" name="page" value="{{ mascotas.previous_page_number }}">
+                <button type="submit" class="page-link">«</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">«</span></li>
+          {% endif %}
+
+          {# Números de página #}
+          {% for num in mascotas.paginator.page_range %}
+            <li class="page-item {% if num == mascotas.number %}active{% endif %}">
+              <form method="get">
+                <input type="hidden" name="tipo" value="{{ params.tipo|default:'' }}">
+                <input type="hidden" name="raza" value="{{ params.raza|default:'' }}">
+                <input type="hidden" name="tam" value="{{ params.tam|default:'' }}">
+                <input type="hidden" name="estado" value="{{ params.estado|default:'' }}">
+                <input type="hidden" name="q" value="{{ params.q|default:'' }}">
+                <input type="hidden" name="o" value="{{ params.o|default:'-id' }}">
+                <input type="hidden" name="page" value="{{ num }}">
+                <button type="submit" class="page-link">{{ num }}</button>
+              </form>
+            </li>
+          {% endfor %}
+
+          {# Siguiente » #}
+          {% if mascotas.has_next %}
+            <li class="page-item">
+              <form method="get">
+                <input type="hidden" name="tipo" value="{{ params.tipo|default:'' }}">
+                <input type="hidden" name="raza" value="{{ params.raza|default:'' }}">
+                <input type="hidden" name="tam" value="{{ params.tam|default:'' }}">
+                <input type="hidden" name="estado" value="{{ params.estado|default:'' }}">
+                <input type="hidden" name="q" value="{{ params.q|default:'' }}">
+                <input type="hidden" name="o" value="{{ params.o|default:'-id' }}">
+                <input type="hidden" name="page" value="{{ mascotas.next_page_number }}">
+                <button type="submit" class="page-link">»</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">»</span></li>
+          {% endif %}
+
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const selectTipo = document.getElementById('select-tipo');
+  if (!selectTipo) return;
+
+  // Detectar URL actual y marcar tipo automáticamente
+  const currentPath = window.location.pathname.toLowerCase();
+
+  if (currentPath.includes('/wufs')) {
+    for (let opt of selectTipo.options) {
+      if (opt.text.trim().toLowerCase() === 'perro') { opt.selected = true; break; }
+    }
+  } else if (currentPath.includes('/miaus')) {
+    for (let opt of selectTipo.options) {
+      if (opt.text.trim().toLowerCase() === 'gato') { opt.selected = true; break; }
+    }
+  } else {
+    selectTipo.value = '';
+  }
+
+  // Redirección al cambiar el tipo
+  selectTipo.addEventListener('change', function() {
+    const tipoTexto = this.options[this.selectedIndex].text.trim().toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+
+    let destino = "{% url 'adopta_listado' %}";
+    if (tipoTexto === 'perro') destino = "{% url 'adopta_wufs' %}";
+    else if (tipoTexto === 'gato') destino = "{% url 'adopta_miaus' %}";
+
+    window.location.href = destino + '?' + params.toString();
+  });
+});
+</script>
+{% endblock %}

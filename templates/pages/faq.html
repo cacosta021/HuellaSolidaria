@@ -1,0 +1,24 @@
+{% extends "layout/base.html" %}
+{% block title %}Preguntas frecuentes — Huella Solidaria{% endblock %}
+{% block content %}
+<h1 class="mb-3">Preguntas frecuentes</h1>
+
+<div class="accordion" id="faq">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#f1">¿Cómo adopto?</button>
+    </h2>
+    <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+      <div class="accordion-body">Elige una mascota, pulsa “Adoptar” y completa la postulación.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#f2">¿Costo de adopción?</button>
+    </h2>
+    <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq">
+      <div class="accordion-body">No cobramos adopción; solicitamos apoyo para vacunas y esterilización cuando aplique.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

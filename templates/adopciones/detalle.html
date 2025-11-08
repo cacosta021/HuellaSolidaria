@@ -1,0 +1,73 @@
+{% extends "layout/base.html" %}
+{% block title %}{{ mascota.nombre }} - Adopción{% endblock %}
+
+{% block content %}
+<a href="{% url 'adopta_listado' %}" class="btn btn-outline-secondary btn-sm mb-3">← Volver</a>
+
+<div class="row g-4 align-items-start">
+
+  <!-- Carrusel de imágenes -->
+  <div class="col-12 col-lg-6">
+    {% if mascota.imagenes.all %}
+    <div id="carouselMascota" class="carousel slide shadow-sm" data-bs-ride="carousel">
+      <div class="carousel-inner rounded overflow-hidden">
+        {% for foto in mascota.imagenes.all %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ foto.imagen_url.url }}"
+               class="d-block w-100"
+               alt="Imagen de {{ mascota.nombre }}"
+               style="object-fit:cover; height:420px;">
+        </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselMascota" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselMascota" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+    {% else %}
+      <div class="card p-4 text-center shadow-sm h-100 d-flex align-items-center justify-content-center">
+        <p class="text-muted mb-0">Sin imágenes adicionales</p>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Descripción de la mascota -->
+  <div class="col-12 col-lg-6">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body">
+        <h2 class="fw-bold mb-2 text-primary text-center">{{ mascota.nombre }}</h2>
+        <div class="text-center small text-muted mb-3">
+          {{ mascota.tipo.nombre }}{% if mascota.raza %} • {{ mascota.raza.nombre }}{% endif %}
+        </div>
+
+        <div class="row text-start g-2 mb-3">
+          {% if mascota.tamano %}
+          <div class="col-6"><strong>Tamaño:</strong> {{ mascota.tamano }}</div>
+          {% endif %}
+          {% if mascota.edad_aprox %}
+          <div class="col-6"><strong>Edad:</strong> {{ mascota.edad_aprox }}</div>
+          {% endif %}
+          {% if mascota.estado %}
+          <div class="col-6"><strong>Estado:</strong> {{ mascota.estado.nombre }}</div>
+          {% endif %}
+        </div>
+
+        {% if mascota.descripcion %}
+        <p class="text-start mb-3" style="text-align: justify;">{{ mascota.descripcion }}</p>
+        {% endif %}
+
+        <div class="text-center mt-3">
+          {% if mascota.estado and mascota.estado.nombre|lower != 'disponible' %}
+            <button class="btn btn-secondary rounded-pill px-4 py-2" disabled>No disponible</button>
+          {% else %}
+            <a href="{% url 'adopta_postular' mascota.pk %}" class="btn btn-warning rounded-pill px-4 py-2">Adoptar</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

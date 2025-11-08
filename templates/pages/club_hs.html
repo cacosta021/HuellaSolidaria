@@ -1,0 +1,16 @@
+{% extends "layout/base.html" %}
+{% block title %}Club HS — Huella Solidaria{% endblock %}
+{% block content %}
+<h1 class="mb-3">Club HS</h1>
+<p class="lead">Tu membresía que salva vidas. Beneficios, eventos y más.</p>
+
+<ul class="list-group mt-3">
+  <li class="list-group-item">Boletines mensuales con avances</li>
+  <li class="list-group-item">Visitas al albergue (previa coordinación)</li>
+  <li class="list-group-item">Descuentos en campañas de salud</li>
+</ul>
+
+<div class="mt-4">
+  <a href="{% url 'donaciones:donar' %}" class="btn btn-warning">Quiero apoyar</a>
+</div>
+{% endblock %}

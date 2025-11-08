@@ -1,0 +1,186 @@
+{% extends "layout/base.html" %}
+{% block title %}Nosotros — Huella Solidaria{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="rounded-3 p-4 p-md-5 mb-4"
+         style="background:linear-gradient(135deg,#0b2e5a 0%,#194a8d 100%);color:#fff;">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-8">
+      <h1 class="display-6 fw-bold mb-2">Nosotros</h1>
+      <p class="lead mb-0">
+        Rescatamos, rehabilitamos y reubicamos animales en familias responsables.  
+        <span class="opacity-75">Cada huella cuenta. <i class="fa-regular fa-heart"></i></span>
+      </p>
+    </div>
+    <div class="col-lg-4 text-lg-end">
+      <a href="{% url 'donaciones:donar' %}" class="btn btn-warning fw-semibold me-2">Dona ahora</a>
+      <a href="{% url 'adopta_listado' %}" class="btn btn-outline-light">Ver mascotas</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISIÓN / VISIÓN -->
+<section class="mb-4">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-start">
+            <div class="rounded-circle bg-warning-subtle text-warning-emphasis d-inline-flex align-items-center justify-content-center me-3"
+                 style="width:44px;height:44px;font-size:1.2rem;"><i class="fa-regular fa-address-card"></i></div>
+            <div>
+              <h5 class="mb-1">Misión</h5>
+              <p class="mb-0">Brindar segundas oportunidades a perros y gatos mediante rescate,
+                rehabilitación y adopción responsable, promoviendo la educación y el bienestar animal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-start">
+            <div class="rounded-circle bg-primary-subtle text-primary-emphasis d-inline-flex align-items-center justify-content-center me-3"
+                 style="width:44px;height:44px;font-size:1.2rem;"><i class="fa-regular fa-eye"></i></div>
+            <div>
+              <h5 class="mb-1">Visión</h5>
+              <p class="mb-0">Construir una comunidad donde ningún animal sea maltratado o abandonado,
+                y donde cada vida tenga un hogar lleno de amor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="mb-4">
+  <h5 class="mb-3">Nuestros valores</h5>
+  <div class="row g-3">
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div style="font-size:1.6rem;"><i class="fa-regular fa-hand-back-fist"></i></div>
+          <div class="fw-semibold mt-2">Compromiso</div>
+          <small class="text-muted d-block">Con cada rescate y familia.</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div style="font-size:1.6rem;"><i class="fa-regular fa-face-smile-beam"></i></div>
+          <div class="fw-semibold mt-2">Empatía</div>
+          <small class="text-muted d-block">Ponemos al animal primero.</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div style="font-size:1.6rem;"><i class="fa-brands fa-searchengin"></i></div>
+          <div class="fw-semibold mt-2">Transparencia</div>
+          <small class="text-muted d-block">Procesos claros y abiertos.</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div style="font-size:1.6rem;"><i class="fa-solid fa-book"></i></div>
+          <div class="fw-semibold mt-2">Educación</div>
+          <small class="text-muted d-block">Promovemos tenencia responsable.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIFRAS DE IMPACTO (simbólicas) -->
+<section class="mb-4">
+  <div class="row g-3">
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm text-center">
+        <div class="card-body">
+          <div class="display-6 fw-bold text-primary">+120</div>
+          <div class="text-muted small">Mascotas rescatadas</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm text-center">
+        <div class="card-body">
+          <div class="display-6 fw-bold text-primary">85%</div>
+          <div class="text-muted small">Tasa de adopción</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm text-center">
+        <div class="card-body">
+          <div class="display-6 fw-bold text-primary">+60</div>
+          <div class="text-muted small">Voluntarios activos</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card border-0 shadow-sm text-center">
+        <div class="card-body">
+          <div class="display-6 fw-bold text-primary">24/7</div>
+          <div class="text-muted small">Atención y cuidados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LÍNEA DE TIEMPO CORTA -->
+<section class="mb-4">
+  <h5 class="mb-3">¿Cómo trabajamos?</h5>
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="p-3 border rounded-3 h-100">
+        <div class="fw-semibold">1) Rescate</div>
+        <small class="text-muted">Respondemos casos y damos atención inmediata.</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3 border rounded-3 h-100">
+        <div class="fw-semibold">2) Cuidado</div>
+        <small class="text-muted">Evaluación veterinaria, vacunas y rehabilitación.</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3 border rounded-3 h-100">
+        <div class="fw-semibold">3) Difusión</div>
+        <small class="text-muted">Publicamos historias y organizamos jornadas.</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="p-3 border rounded-3 h-100">
+        <div class="fw-semibold">4) Adopción</div>
+        <small class="text-muted">Hogares responsables y seguimiento post-adopción.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="my-4 p-4 p-md-5 bg-light rounded-3 border">
+  <div class="row align-items-center g-3">
+    <div class="col-lg-9">
+      <h4 class="fw-bold mb-1">Súmate a la misión</h4>
+      <p class="mb-0 text-muted">Puedes apoyar con una donación, adoptar o ser voluntario.
+        Tu ayuda cambia vidas. <i class="fa-solid fa-paw"></i></p>
+    </div>
+    <div class="col-lg-3 text-lg-end">
+      <a href="{% url 'donaciones:donar' %}" class="btn btn-warning fw-semibold">Quiero ayudar</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

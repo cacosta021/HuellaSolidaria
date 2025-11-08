@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}
+{% block title %}Acceso denegado (403){% endblock %}
+{% block content %}
+<div class="container py-5 text-center">
+  <h1 class="display-4 text-warning">403</h1>
+  <p class="lead">No tienes permiso para acceder a esta página.</p>
+  <p>Si crees que esto es un error, por favor contacta al administrador.</p>
+  <a class="btn btn-primary mt-3" href="{% url 'pages_home' %}">Volver al inicio</a>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#0b2e5a;">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'pages_home' %}">
+            <i class="fa-solid fa-paw"></i> HuellaSolidaria
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="mainNav" class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- Adopta (dropdown) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Adopta</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'adopta_wufs' %}">Wufs</a></li>
+                        <li><a class="dropdown-item" href="{% url 'adopta_miaus' %}">Miaus</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'pages_club_hs' %}active{% endif %}"
+                        href="{% url 'pages_club_hs' %}">Club HS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'pages_consultas' %}active{% endif %}"
+                        href="{% url 'pages_consultas' %}">Consultas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'list' and request.resolver_match.app_name == 'blog' %}active{% endif %}"
+                        href="{% url 'blog:list' %}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'pages_nosotros' %}active{% endif %}"
+                        href="{% url 'pages_nosotros' %}">Conocenos</a>
+                </li>
+            </ul>
+
+            <div class="d-flex gap-2">
+                <a class="btn btn-warning fw-semibold" href="{% url 'donaciones:donar' %}">AYUDA AQUÍ</a>
+                <a class="btn btn-outline-light" href="/admin/">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+</nav>

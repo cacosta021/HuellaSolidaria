@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}
+{% block title %}Solicitud incorrecta (400){% endblock %}
+{% block content %}
+<div class="container py-5 text-center">
+  <h1 class="display-4 text-info">400</h1>
+  <p class="lead">La solicitud enviada no es válida.</p>
+  <p>Por favor verifica los datos e inténtalo nuevamente.</p>
+  <a class="btn btn-primary mt-3" href="{% url 'pages_home' %}">Volver al inicio</a>
+</div>
+{% endblock %}

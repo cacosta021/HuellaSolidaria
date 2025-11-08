@@ -1,0 +1,30 @@
+/* Colores base como WUF */
+:root {
+	--azul: #0b2e5a;
+	--amarillo: #ffcc33;
+}
+.navbar { box-shadow: 0 2px 6px rgba(0,0,0,.06); }
+.card .badge { font-weight: 600; }
+body {
+	background-color: #f7f9fb;
+}
+h2 {
+	color: #0b2e5a;
+	font-weight: 700;
+}
+.nav-link.active { font-weight: 600; color: #0d6efd !important; }
+
+.pet-img {
+  height: 200px;  
+  width: 100%;
+  object-fit: cover;
+}
+
+#homeCarousel img {
+  height: 500px;
+  object-fit: cover;
+}
+section {
+  max-width: 1200px;
+  margin: auto;
+}

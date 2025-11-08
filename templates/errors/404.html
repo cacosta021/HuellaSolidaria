@@ -1,0 +1,9 @@
+{% extends "layout/base.html" %}
+{% block title %}Página no encontrada (404){% endblock %}
+{% block content %}
+<div class="container py-5 text-center">
+  <h1 class="display-4">404</h1>
+  <p class="lead">La página que buscas no existe.</p>
+  <a class="btn btn-primary mt-3" href="{% url 'pages_home' %}">Volver al inicio</a>
+</div>
+{% endblock %}

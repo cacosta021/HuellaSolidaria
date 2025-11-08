@@ -1,0 +1,140 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block title %}Inicio — HuellaSolidaria{% endblock %}
+
+{% block content %}
+<!-- Carrusel principal -->
+<div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{% static 'img/carousel/banner1.jpg' %}" class="d-block w-100" alt="Adopta un amigo">
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'img/carousel/banner2.jpg' %}" class="d-block w-100" alt="Únete a Huella Solidaria">
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'img/carousel/banner3.jpg' %}" class="d-block w-100" alt="Ayuda y transforma vidas">
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'img/carousel/banner4.jpg' %}" class="d-block w-100" alt="Ayuda y transforma vidas">
+    </div>
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- Sección bienvenida -->
+<section class="text-center my-5 px-3">
+  <h2 class="fw-bold">Bienvenido a HuellaSolidaria 🐾</h2>
+  <p class="lead text-muted mx-auto" style="max-width:700px;">
+    Somos una comunidad comprometida con rescatar, cuidar y encontrar un hogar para perros y gatos abandonados.
+    Creemos que cada vida cuenta y que el amor puede transformar su destino.
+  </p>
+  <a href="{% url 'adopta_listado' %}" class="btn btn-warning fw-semibold mt-2">Ver mascotas en adopción</a>
+</section>
+
+<!-- Sección de valores -->
+<section class="row text-center g-4 my-5 px-3">
+  <div class="col-md-4">
+    <img src="{% static 'img/icono-adopta.png' %}" width="80" alt="Adopta con amor">
+    <h5 class="fw-bold mt-2">Adopta con amor</h5>
+    <p>Da una segunda oportunidad a un animal que necesita un hogar.</p>
+  </div>
+  <div class="col-md-4">
+    <img src="{% static 'img/icono-ayuda.png' %}" width="80" alt="Únete al cambio">
+    <h5 class="fw-bold mt-2">Únete al cambio</h5>
+    <p>Colabora con nuestras campañas y haz una diferencia real.</p>
+  </div>
+  <div class="col-md-4">
+    <img src="{% static 'img/icono-club.png' %}" width="80" alt="Sé parte del Club HS">
+    <h5 class="fw-bold mt-2">Sé parte del Club HS</h5>
+    <p>Accede a beneficios exclusivos mientras ayudas a salvar vidas.</p>
+  </div>
+</section>
+
+<!--  Botón flotante de WhatsApp -->
+<a href="https://wa.me/51940741126?text=Hola%20%20quiero%20más%20información%20sobre%20las%20adopciones%20de%20HuellaSolidaria"
+   target="_blank" class="btn btn-success rounded-circle shadow-lg whatsapp-float">
+  <i class="fab fa-whatsapp fa-lg"></i>
+</a>
+
+<!--  Redes sociales flotantes -->
+<div class="social-float">
+  <a href="https://www.facebook.com/" target="_blank" class="social-link bg-primary">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.instagram.com/" target="_blank" class="social-link bg-danger">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.youtube.com/" target="_blank" class="social-link bg-dark">
+    <i class="fab fa-youtube"></i>
+  </a>
+  <a href="https://www.linkedin.com/" target="_blank" class="social-link bg-info">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+</div>
+
+<style>
+/* --- Botón flotante WhatsApp --- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background-color: #25D366;
+  color: white;
+  border: none;
+  transition: transform 0.2s, background-color 0.2s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  background-color: #1ebe5d;
+  color: #fff;
+}
+
+/* --- Redes sociales laterales --- */
+.social-float {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 1040;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.social-link {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 4px 0 0 4px;
+  transition: all 0.2s;
+}
+.social-link:hover {
+  opacity: 0.8;
+  transform: translateX(-4px);
+}
+</style>
+
+<!-- FontAwesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}

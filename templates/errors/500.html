@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}
+{% block title %}Error interno del servidor (500){% endblock %}
+{% block content %}
+<div class="container py-5 text-center">
+  <h1 class="display-4 text-danger">500</h1>
+  <p class="lead">Ha ocurrido un error interno en el servidor.</p>
+  <p>No te preocupes, nuestro equipo técnico ya fue notificado.</p>
+  <a class="btn btn-primary mt-3" href="{% url 'pages_home' %}">Volver al inicio</a>
+</div>
+{% endblock %}

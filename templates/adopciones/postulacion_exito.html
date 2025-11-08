@@ -1,0 +1,26 @@
+{% extends "layout/base.html" %}
+{% block title %}¡Postulaci&oacute;n enviada!{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body text-center p-4">
+        <div class="mb-3">
+          {% if mascota.foto_url %}
+            <img src="{{ mascota.foto_url.url }}" alt="{{ mascota.nombre }}" class="rounded" style="max-height:160px;">
+          {% endif %}
+        </div>
+        <h3 class="mb-2">¡Gracias por tu postulaci&oacute;n!</h3>
+        <p class="text-muted mb-3">
+          Hemos recibido tu solicitud para <strong>{{ mascota.nombre }}</strong>.
+          Nuestro equipo revisará tu informaci&oacute;n y te contactar&aacute; pronto.
+        </p>
+
+        <a href="{% url 'adopta_listado' %}" class="btn btn-outline-secondary me-2">Ver m&aacute;s mascotas</a>
+        <a href="{% url 'adopta_detalle' mascota.pk %}" class="btn btn-primary">Volver al detalle</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
